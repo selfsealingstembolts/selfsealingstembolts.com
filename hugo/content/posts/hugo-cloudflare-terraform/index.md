@@ -1,10 +1,9 @@
 ---
 title: Deploying a static site on Cloudflare Pages with Hugo and Terraform
 description: Using the Hugo framework to build assets for a static website hosted on a Terraform-managed Cloudflare Pages project
-slug: hugo-cloudflare-terraform
 date: 2024-02-01 00:00:00+0000
-categories:
-    - Terraform
+featured_image: "image.jpg"
+categories: Terraform
 tags:
     - terraform
     - hugo
