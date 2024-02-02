@@ -1,0 +1,9 @@
+.DS_Store
+
+
+# Generated resources
+/hugo/public/
+/hugo/resources/
+
+# Locks
+.hugo_build.lock
