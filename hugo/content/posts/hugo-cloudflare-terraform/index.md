@@ -84,7 +84,6 @@ brew install hugo
 ### Initialization
 
 Once installed, it's time to initialize a new project. Create a new directory for the project - we'll use `~/Development/www/selfsealingstembolts.com` here. This directory will contain two directories: `terraform` and `hugo`, each containing the resources of its respective component.
-
     
 ```bash
 mkdir -p ~/Development/www/selfsealingstembolts\.com/{terraform,hugo}
@@ -99,16 +98,74 @@ hugo new site ./hugo
 
 ### Theming
 
-Next up, let's select a theme. This tutorial will use [Stacks](https://stack.jimmycai.com/), but it is by no means the only (or situationally appropriate) option. 
-> The Hugo project conveniently provides a [list of themes](https://themes.gohugo.io/) for your perusal. However, selecting a theme other than the one specified by this tutorial will alter some of the configuration elements and site structure described here.  
+Next up, let's select a theme. This tutorial will use [Diary](https://github.com/amazingrise/hugo-theme-diary), but it is by no means the only option available. 
 
-Themes can be installed either as a Git submodule or a Hugo module. Installation as a Hugo module is the most canonical method, therefore it is the method we will use here. First, we must convert our project to a Hugo module.
+> The Hugo project conveniently provides a [list of themes here](https://themes.gohugo.io/) for your perusal. However, selecting a theme other than the one specified by this tutorial will alter some of the configuration elements and site structure described here.  
+
+Move to the `hugo` directory, where the theme will be installed as a Git submodule in `themes/diary` directory.
 
 ```bash
 cd hugo
-hugo mod init github.com/<user>/<repo>
+git submodule add https://github.com/AmazingRise/hugo-theme-diary.git themes/diary
 ```
 
-where `<user>` is your GitHub username and `<repo>` is the name of your git repository.
+We'll create a configuration file for the theme at `config.toml` with the following contents:
 
+```toml
+# config.toml
+baseURL = "https://selfsealingstembolts.com/"
+DefaultContentLanguage = "en" # Theme's display language, supports: en, fr, zh, zh-hant
+languageCode = "en-us"
+title = "Josh Weston"
+copyright = "Copyright 2023-2024 Josh Weston"
+theme = "diary"
+# googleAnalytics = "UA-123-45"
 
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = true
+    lineNumbersInTable = true
+    noClasses = true
+    style = "gruvbox"
+    tabWidth = 4
+
+[params]
+subtitle = "For the love of infrastructure, automation, and yamok sauce."
+enableGitalk = false
+enableGiscus = false
+
+# Twitter Card and Open Graph settings
+enableOpenGraph = true
+enableTwitterCards = true
+title = "Self-Sealing Stem Bolts" # will set 'og:site_name'
+description = "A blog by Josh Weston"  # will set 'og:description'
+
+[taxonomies]
+   tag = "tags"
+   category = "categories"
+
+[[menu.main]]
+url = "/categories"
+name = "Categories"
+weight = 2
+[[menu.main]]
+url = "/tags"
+name = "Tags"
+weight = 3
+[[menu.main]]
+url = "/posts"
+name = "Archive"
+weight = 1
+[[menu.main]]
+url = "/index.xml"
+name = "RSS Feed"
+weight = 4
+```
+
+> The most up-to-date version of this file can be found in this tutorial's companion [GitHub repo](https://github.com/selfsealingstembolts/selfsealingstembolts.com/blob/main/hugo/config.toml)
+
+This configuration is not comprehensive; additional configuration options are detailed in the theme's [documentation](https://github.com/AmazingRise/hugo-theme-diary/wiki). It is, however sufficient to build a functioning site.
